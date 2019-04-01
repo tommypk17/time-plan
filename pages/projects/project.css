@@ -1,0 +1,14 @@
+#project-table{
+	text-align: center;
+/*	width: 100%;*/
+}
+
+#project-table > *{
+	width: 100%;
+	
+}
+
+#sec1 {
+	flex-direction: column;
+	align-items: center;
+}

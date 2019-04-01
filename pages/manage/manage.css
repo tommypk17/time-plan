@@ -1,0 +1,21 @@
+#sec1, #sec2, #sec3{
+	flex-direction: column;
+	align-items: center;
+}
+
+#sec2 > div{
+	display: flex;
+	flex-direction: column;
+}
+
+#sec3 > div{
+	display: flex;
+	flex-direction: column;
+}
+
+input:valid{
+/*	border: 3px solid green;*/
+}
+input:invalid{
+	border: 3px solid red;
+}

@@ -1,0 +1,41 @@
+<div>
+	<h2>Select an option to create</h2>
+	<label for="selection-create">Add a new: </label>
+	<select name="selection-create">
+		<option value="create_team">Team</option>
+		<option value="create_employee">Employee</option>
+		<option value="create_project">Project</option>
+		<option value="create_task">Task</option>
+		<option value="create_employee_team">Employee to a Team</option>
+		<option value="create_team_project">Team to a Project</option>
+	</select>
+	<a id="select-create-option" class="button">Select</a>
+
+</div>
+
+<script>
+	$(document).ready(function () {
+		$('#select-create-option').on('click', function () {
+			selected = $('select[name=selection-create]').val()
+			loadSelectionCreate(selected);
+		})
+	});
+
+	function loadSelectionCreate(selected) {
+		if (selected == 'create_team') {
+			$('#sec3').load('add_team.html')
+		} else if (selected == 'create_employee') {
+			$('#sec3').load('add_employee.html')
+		} else if (selected == 'create_project') {
+			$('#sec3').load('add_project.html')
+		} else if (selected == 'create_task') {
+			$('#sec3').load('add_task.html')
+		} else if (selected == 'create_employee_team') {
+			$('#sec3').load('add_employee_team.html')
+		}else if(selected == 'create_team_project'){
+			$('#sec3').load('add_team_project.html')
+
+		}
+
+	}
+</script>

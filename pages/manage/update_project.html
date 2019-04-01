@@ -1,0 +1,95 @@
+<div>
+	<h2>Update Project</h2>
+	<!--	Select User-->
+	<label for="user-selection">Project: </label>
+
+	<div>
+		<select name="project-selection"></select>
+		<a id="select-project" class="button">Select Project</a>
+	</div>
+	<label for="project-name">Project Name: </label><input name="project-name">
+	<label for="description">Description: </label><input name="description">
+	<label for="start-date">Start Date: </label><input name="start-date">
+	<label for="due-date">Due Date: </label><input name="due-date">
+	<label for="budget">Budget: </label><input name="budget">
+
+
+	<a id="project-submit" class="button">Update Project</a>
+</div>
+<script>
+	$(document).ready(function() {
+		loadProjects();
+		$('#project-submit').on('click', function() {
+			updateProject($('select[name=project-selection]').val(), $('input[name=project-name]').val(), $('input[name=description]').val(), $('input[name=start-date]').val(), $('input[name=due-date]').val(), $('input[name=budget]').val())
+		})
+		$("#select-project").on('click', function() {
+			$.ajax({
+				type: 'GET',
+				dataType: 'json',
+				url: '../../api/projects/read_project.php',
+				data: {
+					projectid: $('select[name=project-selection]').val()
+				},
+				success: function(data) {
+					project = data[0]
+					$('input[name=project-name]').attr('value', project['project_name'])
+					$('input[name=description]').attr('value', project['description'])
+					$('input[name=start-date]').attr('value', project['start_date'])
+					$('input[name=due-date]').attr('value', project['due_date'])
+					$('input[name=budget]').attr('value', project['budget'])
+				},
+				error: function(xhr, status, error) {
+					var errorMessage = xhr.status + ': ' + xhr.statusText
+					console.log('Error - ' + errorMessage + " " + error);
+				}
+			});
+		})
+	})
+
+	function loadProjects() {
+		$.ajax({
+			type: 'GET',
+			dataType: 'json',
+			url: '../../api/projects/read_project_names.php',
+			success: function(data) {
+				$('select[name=project-selection]').html('');
+				for (x in data) {
+					option = $('<option>')
+					option.attr('value', data[x]['project_id'])
+					option.text(data[x]['project_name'])
+					$('select[name=project-selection]').append(option)
+				}
+			},
+			error: function(xhr, status, error) {
+				var errorMessage = xhr.status + ': ' + xhr.statusText
+				console.log('Error - ' + errorMessage + " " + error);
+			}
+		});
+	}
+
+
+	function updateProject(id, projectname, description, startdate, duedate, budget) {
+		$.ajax({
+			type: 'POST',
+			dataType: 'html',
+			url: '../../api/projects/update_project.php',
+			data: {
+				projectid: id,
+				projectname: projectname,
+				description: description,
+				startdate: startdate,
+				duedate: duedate,
+				budget:budget
+			},
+			success: function(data) {
+				alert('Project has been updated!')
+				loadProjects();
+			},
+			error: function(xhr, status, error) {
+				var errorMessage = xhr.status + ': ' + xhr.statusText
+				console.log('Error - ' + errorMessage + " " + error);
+			}
+		});
+	}
+
+</script>

@@ -1,0 +1,67 @@
+<div>
+	<h2>Create New Task</h2>
+	<label for="task-name">Task Name: </label><input type="text" name="task-name" title="Please enter a Task Name" required minlength="2" maxlength="15">
+	<label for="task-start-date">Start Date: </label><input type="text" name="task-start-date" id="task-start-date" title="Please choose a date" required>
+	<label for="task-due-date">Due Date: </label><input type="text" name="task-due-date" id="task-due-date" title="Please choose a date" required>
+	<label for="task-budget">Task Budget: </label><input type="number" name="task-budget" title="Please enter a number" required>
+	<label for="task-description">Description: </label><textarea name="task-description" title="Please enter a Task Description"></textarea>
+	
+<!--	Select Project-->
+	<label for="project-selection">Within Project: </label>
+	<select name="project-selection"></select>
+<!--	Select User-->
+	<label for="user-selection">Assigned To: </label>
+	<select name="user-selection"></select>
+	<a id="task-submit" class="button">Create Task</a>
+
+</div>
+<script>
+	$(function() {
+		$("#task-start-date").datepicker({ dateFormat: 'yy-mm-dd' });
+		$("#task-due-date").datepicker({ dateFormat: 'yy-mm-dd' });
+	});
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		url: '../../api/projects/read_project_names.php',
+		success: function (data) {
+			for(x in data){
+				option = $('<option>')
+				option.attr('value', data[x]['project_id'])
+				option.text(data[x]['project_name'])
+				$('select[name=project-selection]').append(option)
+			}
+		},
+		error: function (xhr, status, error) {
+			var errorMessage = xhr.status + ': ' + xhr.statusText
+			console.log('Error - ' + errorMessage + " " + error);
+		}
+	});
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		url: '../../api/account/read_user_names.php',
+		success: function (data) {
+			for(x in data){
+				option = $('<option>')
+				option.attr('value', data[x]['user_id'])
+				option.text(data[x]['first_name']+" "+data[x]['last_name'])
+				$('select[name=user-selection]').append(option)
+			}
+		},
+		error: function (xhr, status, error) {
+			var errorMessage = xhr.status + ': ' + xhr.statusText
+			console.log('Error - ' + errorMessage + " " + error);
+		}
+	});
+	$(document).ready(function(){
+		$('#task-submit').on('click', function(){
+			if($('input[name=task-name]').val() == "" || $('input[name=task-start-date]').val() == "" || $('input[name=task-due-date]').val() == "" || $('input[name=task-budget]').val() == ""){
+				alert('Please check over the fields highlighted in red.')
+			}else{
+				createTask($('select[name=user-selection]').val(), $('select[name=project-selection]').val(), $('input[name=task-name]').val(), $('textarea[name=task-description]').val(), $('input[name=task-start-date]').val(), $('input[name=task-due-date]').val(), $('input[name=task-budget]').val())
+			}
+		})
+	})
+	
+</script>

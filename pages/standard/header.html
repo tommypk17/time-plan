@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Final Project</title>
+	<link href="../../css/index.css" type="text/css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Slabo+27px" rel="stylesheet">
+
+	<!--Jquery or Other JS-->
+	<script src="../../js/jquery-3.3.1.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+
+	<!--Custom Js-->
+	<script src="../../js/main.js"></script>
+	<script src="../../js/helper.js"></script>
+	<script src="../../pages/standard/standard.js"></script>
+
+
+</head>
+
+<body>
+	<div id="alert" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<p id="alert-message"></p>
+		</div>
+	</div>
+	<script>
+		$('.close').on('click', function(){
+			$('#alert').css('display', 'none')
+		})
+	</script>
+	<div class="wrapper">
+		<header class="header">
+			<h1 id="brand-name">TimePlan</h1>
+			<nav>
+				<a href="../home/" name="home">Home</a>
+				<a href="../tasks/" name="tasks">Tasks</a>
+				<a href="../teams/" name="teams">Teams</a>
+				<a href="../projects/" name="projects">Projects</a>
+				<a href="../messages/" name="messages">Messages</a>
+				<a href="../account/" name="account">Account</a>
+			</nav>
+		</header>

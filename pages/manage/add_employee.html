@@ -1,0 +1,40 @@
+<div>
+	<h2>Create New Employee</h2>
+	<label for="first-name">First Name: </label><input name="first-name" type="text" title="Please enter a first name" required minlength=2 maxlength=15>
+	<label for="last-name">Last Name: </label><input name="last-name" type="text" title="Please enter a last name" required minlength=2 maxlength=15>
+	<label for="user-name">Username: </label><input name="user-name" type="text" title="Please enter a username" required minlength=2 maxlength=15>
+	<label for="password">Password: </label><input name="password" type="password" title="Please enter a password" required minlength=2 maxlength=15>
+<!--	Select department-->
+	<label for="department-selection">Department: </label>
+	<select name="department-selection"></select>
+
+	<a id="employee-submit" class="button">Create Employee</a>
+</div>
+<script>
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		url: '../../api/departments/read_department_names.php',
+		success: function (data) {
+			for(x in data){
+				option = $('<option>')
+				option.attr('value', data[x]['department_id'])
+				option.text(data[x]['name'])
+				$('select[name=department-selection]').append(option)
+			}
+		},
+		error: function (xhr, status, error) {
+			var errorMessage = xhr.status + ': ' + xhr.statusText
+			console.log('Error - ' + errorMessage + " " + error);
+		}
+	});
+	$(document).ready(function(){
+		$('#employee-submit').on('click', function(){
+			if($('input[name=first-name]').val() == "" || $('input[name=last-name]').val() == "" || $('input[name=user-name]').val() == "" || $('input[name=password]').val()){
+				alert("Please check over the fields above.")
+			}else{
+				createEmployee($('input[name=first-name]').val(), $('input[name=last-name]').val(), $('input[name=user-name]').val(), $('input[name=password]').val(), $('select[name=department-selection]').val())
+			}
+		})
+	})
+</script>

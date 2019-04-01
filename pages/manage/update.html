@@ -1,0 +1,28 @@
+<div>
+	<h2>Select an option to Update</h2>
+	<label for="selection-update">Update Section: </label>
+	<select name="selection-update">
+		<option value="update_employee">Employee</option>
+		<option value="update_project">Project</option>
+	</select>
+	<a id="select-update-option" class="button">Select</a>
+
+</div>
+
+<script>
+	$(document).ready(function () {
+		$('#select-update-option').on('click', function () {
+			selected = $('select[name=selection-update]').val()
+			loadSelectionUpdate(selected);
+		})
+	});
+
+	function loadSelectionUpdate(selected) {
+		if (selected == 'update_employee') {
+			$('#sec3').load('update_employee.html')
+		} else if (selected == 'update_project') {
+			$('#sec3').load('update_project.html')
+		}
+
+	}
+</script>

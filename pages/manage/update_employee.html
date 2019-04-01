@@ -1,0 +1,91 @@
+<div>
+	<h2>Update Employee</h2>
+	<!--	Select User-->
+	<label for="user-selection">Employee: </label>
+
+	<div>
+		<select name="user-selection"></select>
+		<a id="select-user" class="button">Select Employee</a>
+	</div>
+	<label for="first-name">First Name: </label><input name="first-name">
+	<label for="last-name">Last Name: </label><input name="last-name">
+	<label for="user-name">Username: </label><input name="user-name">
+	<label for="password">Password: </label><input name="password" type="password">
+
+
+	<a id="employee-submit" class="button">Update Employee</a>
+</div>
+<script>
+	$(document).ready(function() {
+		loadEmployees();
+		$('#employee-submit').on('click', function() {
+			updateEmployee($('select[name=user-selection]').val(), $('input[name=first-name]').val(), $('input[name=last-name]').val(), $('input[name=user-name]').val(), $('input[name=password]').val())
+		})
+	})
+	function loadEmployees(){
+		$.ajax({
+			type: 'GET',
+			dataType: 'json',
+			url: '../../api/account/read_user_names.php',
+			success: function(data) {
+				$('select[name=user-selection]').html('');
+				for (x in data) {
+					option = $('<option>')
+					option.attr('value', data[x]['user_id'])
+					option.text(data[x]['first_name'] + " " + data[x]['last_name'])
+					$('select[name=user-selection]').append(option)
+				}
+			},
+			error: function(xhr, status, error) {
+				var errorMessage = xhr.status + ': ' + xhr.statusText
+				console.log('Error - ' + errorMessage + " " + error);
+			}
+		});
+	}
+	
+	$(document).ready(function(){
+		$("#select-user").on('click', function(){
+			$.ajax({
+				type: 'GET',
+				dataType: 'json',
+				url: '../../api/account/read_employee.php',
+				data:{userid:$('select[name=user-selection]').val()},
+				success: function(data) {
+					employee = data[0]
+					$('input[name=first-name]').attr('value', employee['first_name'])
+					$('input[name=last-name]').attr('value', employee['last_name'])
+					$('input[name=user-name]').attr('value', employee['username'])
+					$('input[name=password]').attr('value', employee['password'])
+				},
+				error: function(xhr, status, error) {
+					var errorMessage = xhr.status + ': ' + xhr.statusText
+					console.log('Error - ' + errorMessage + " " + error);
+				}
+			});
+		})
+	})
+
+	function updateEmployee(id, firstname, lastname, username, password) {
+		$.ajax({
+			type: 'POST',
+			dataType: 'html',
+			url: '../../api/account/update_employee.php',
+			data: {
+				userid: id,
+				firstname: firstname,
+				lastname: lastname,
+				username: username,
+				password: password,
+			},
+			success: function(data) {
+				alert('Employee has been updated!')
+				loadEmployees();
+			},
+			error: function(xhr, status, error) {
+				var errorMessage = xhr.status + ': ' + xhr.statusText
+				console.log('Error - ' + errorMessage + " " + error);
+			}
+		});
+	}
+
+</script>

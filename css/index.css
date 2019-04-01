@@ -1,0 +1,255 @@
+* {
+	padding: 0;
+	margin: 0;
+
+}
+
+:root {
+	--header-bg-color: #00458A;
+
+	--nav-color: #0CFFA9;
+	--nav-hover-color: #C7E3FF;
+	--nav-active-color: #EEEEEE;
+
+	--td-bg-hover-color: #C4C4C4;
+
+	--button-bg-color: #0CFFA9;
+	--button-bg-hover-color: #00CD84;
+	--button-bg-active-color: #0CFFA9;
+	;
+	--button-color: #ffffff;
+
+	--aside-bg-color: #C4C4C4;
+
+	--footer-bg-color: #1E90FF;
+	--footer-color: #ffffff;
+
+
+}
+#brand-name {
+	color: var(--nav-color);
+	font-size: 20px;
+}
+
+header {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 2em;
+	background-color: var(--header-bg-color);
+}
+
+nav > a {
+	padding: 1em;
+	text-decoration: none;
+	color: var(--nav-color);
+}
+
+nav > a:link {}
+
+ul {
+	list-style: none
+}
+
+nav > a:hover {
+	color: var(--nav-hover-color);
+	cursor: pointer;
+}
+
+nav > a:active {
+	color: var(--nav-active-color);
+	cursor: pointer;
+}
+
+.button {
+	padding: 1em 2em;
+	margin: 1em;
+	background-color: var(--button-bg-color);
+	color: var(--button-color);
+	text-align: center;
+	border-radius: 1em;
+	border: 2px solid rgb(0, 0, 0, .1)
+}
+
+.button:hover {
+	background-color: var(--button-bg-hover-color);
+}
+
+.button:active {
+	background-color: var(--button-bg-active-color);
+}
+
+tr:hover {
+	background-color: var(--td-bg-hover-color);
+}
+
+.table-header:hover {
+	background-color: #FFFFFF;
+}
+
+.wrapper {
+	display: flex;
+	flex-flow: row wrap;
+
+}
+.wrapper > * {
+	padding: 1em;
+	flex: 1 100%;
+}
+
+.main {
+	border-left: 2px solid rgb(0, 0, 0, .3);
+	border-right: 2px solid rgb(0, 0, 0, .3);
+	width: 100%;
+	min-height: 100vh;
+/*	overflow: hidden;*/
+}
+
+.aside {
+	background-color: var(--aside-bg-color);
+}
+
+.footer {
+	text-align: center;
+	color: var(--footer-color);
+	background-color: var(--footer-bg-color);
+}
+
+h1 {
+	font-size: 48px;
+}
+
+h2 {
+	font-size: 24px;
+}
+
+h1,
+h2 {
+	font-family: 'Slabo 27px', serif;
+}
+
+p,
+h3,
+h4,
+h5,
+td,
+th,
+a {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	padding: 2em;
+}
+
+table {
+	border-spacing: 0;
+	align-content: center;
+}
+
+th {
+	padding: 1em;
+	border-bottom: 2px solid #000000;
+}
+
+td {
+	padding: 1em;
+	border-bottom: 1px inset #C4C4C4
+}
+
+#sec1 {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.chart {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+input, textarea, select{
+	padding: 1em;
+	margin: .5em;
+	background-color: rgb(77, 77, 77, .3);
+	border-radius: 1em;
+	border: 1px solid rgb(0,0,0,.3);
+	color: white;
+}
+input:focus, textarea:focus, select:focus{
+	outline-color: #0CFFA9;
+}
+input:hover, textarea:hover, select:hover{
+	background-color: rgb(77, 77, 77, .5);
+}
+/*Alert Modal*/
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*End Alert Modal*/
+
+@media (min-width: 600px) {
+	.aside {
+		display: none;
+	}
+}
+
+@media all and (min-width: 800px) {
+	.aside {
+		flex: 1;
+		display: inherit;
+	}
+
+	.aside-l {
+		order: 1;
+	}
+
+	.main {
+		order: 2;
+		flex: 8 0px;
+	}
+
+	.aside-r {
+		order: 3;
+	}
+
+	.footer {
+		order: 4;
+	}
+}

@@ -1,0 +1,54 @@
+<div>
+	<h2>Add Empoyee to Team</h2>
+<!--	Select User-->
+	<label for="user-selection">Employee: </label>
+	<select name="user-selection"></select>
+<!--	Select Team-->
+	<label for="team-selection">Team: </label>
+	<select name="team-selection"></select>
+
+	<a id="employee-submit" class="button">Add Employee to Team</a>
+</div>
+<script>
+	$(document).ready(function(){
+		$('#employee-submit').on('click', function(){
+//			console.log('hey')
+			createEmployeeTeam($('select[name=user-selection]').val(), $('select[name=team-selection]').val())
+			
+		})
+	})
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		url: '../../api/teams/read_team_names.php',
+		success: function (data) {
+			for(x in data){
+				option = $('<option>')
+				option.attr('value', data[x]['team_id'])
+				option.text(data[x]['team_name'])
+				$('select[name=team-selection]').append(option)
+			}
+		},
+		error: function (xhr, status, error) {
+			var errorMessage = xhr.status + ': ' + xhr.statusText
+			console.log('Error - ' + errorMessage + " " + error);
+		}
+	});
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		url: '../../api/account/read_user_names.php',
+		success: function (data) {
+			for(x in data){
+				option = $('<option>')
+				option.attr('value', data[x]['user_id'])
+				option.text(data[x]['first_name']+" "+data[x]['last_name'])
+				$('select[name=user-selection]').append(option)
+			}
+		},
+		error: function (xhr, status, error) {
+			var errorMessage = xhr.status + ': ' + xhr.statusText
+			console.log('Error - ' + errorMessage + " " + error);
+		}
+	});
+</script>

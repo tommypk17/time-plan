@@ -1,0 +1,28 @@
+<div>
+	<h2>Create New Project</h2>
+	<label for="project-name">Project Name: </label><input type="text" name="project-name" title="Please enter a Project Name" required>
+	<label for="project-start-date">Start Date: </label><input type="text" name="project-start-date" id="project-start-date" title="Please enter a Start Date" required >
+	<label for="project-due-date">Due Date: </label><input type="text" name="project-due-date" id="project-due-date" title="Please enter a Due Date" required>
+	<label for="project-budget">Project Budget: </label><input type="number" name="project-budget" title="Please enter a Budget" required>
+	<label for="project-description" title="Please enter a Description">Description: </label><textarea name="project-description"></textarea>
+	<a id="project-submit" class="button">Create Project</a>
+</div>
+<script>
+	$(function() {
+		$("#project-start-date").datepicker({ dateFormat: 'yy-mm-dd' });
+		$("#project-due-date").datepicker({ dateFormat: 'yy-mm-dd' });
+	});
+	$('#project-submit').on('click', function() {
+		if($('input[name=project-name]').val() == "" || $('input[name=project-start-date]').val() == "" || $('input[name=project-due-date]').val() == "" || $('input[name=project-budget]').val() == ""){
+			alert('Please check over the fields in red')
+		}else{
+			createProject({
+				name: $('input[name=project-name]').val(),
+				start: $('input[name=project-start-date]').val(),
+				due: $('input[name=project-due-date]').val(),
+				budget: $('input[name=project-budget]').val(),
+				description: $('textarea[name=project-description]').val(),
+			});
+		}
+	})
+</script>

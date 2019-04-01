@@ -1,0 +1,17 @@
+<div>
+	<h2>Create New Team</h2>
+	<label for="team-name">Team Name: </label><input name="team-name" type="text" required minlength="2" maxlength="15">
+	<a id="team-submit" class="button">Create Team</a>
+</div>
+<script>
+	$(document).ready(function(){
+		$('#team-submit').on('click', function(){
+			if($('input[name=team-name]').val() == ""){
+				alert("Please enter a Team Name!")
+			}else{
+				createTeam($('input[name=team-name]').val())
+				
+			}
+		})
+	})
+</script>
