@@ -22,16 +22,16 @@
 		}
 		
 		public function pitt_server(){
-			$this->_db_name = 'tpk18';
-			$this->_username = 'tpk18';
-			$this->_password = '4029788';
-			$this->_host_name = "localhost";
+			$this->_db_name = '';
+			$this->_username = '';
+			$this->_password = '';
+			$this->_host_name = "";
 		}
 		public function local_server(){
-			$this->_db_name = 'tpk18';
-			$this->_username = 'full_user';
-			$this->_password = 'Katie7523';
-			$this->_host_name = "localhost";
+			$this->_db_name = '';
+			$this->_username = '';
+			$this->_password = '';
+			$this->_host_name = "";
 
 		}
 		
